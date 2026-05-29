@@ -42,14 +42,14 @@ struct ir_peripheral_slot {
 };
 
 // static struct ir_peripheral_slot peripherals[ZMK_SPLIT_BLE_PERIPHERAL_COUNT];
-static struct ir_peripheral_slot peripherals[ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS];
+static struct ir_peripheral_slot peripherals[CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS];
 
 static const struct bt_uuid_128 split_ir_service_uuid = BT_UUID_INIT_128(
     ZMK_SPLIT_BT_IR_SERVICE_UUID);
 
 static int ir_peripheral_slot_index_for_conn(struct bt_conn *conn) {
 //    for (int i = 0; i < ZMK_SPLIT_BLE_PERIPHERAL_COUNT; i++) {
-        for (int i = 0; i < ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS; i++) {
+        for (int i = 0; i < CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS; i++) {
         if (peripherals[i].conn == conn) {
             return i;
         }
@@ -67,7 +67,7 @@ static struct ir_peripheral_slot *ir_peripheral_slot_for_conn(struct bt_conn *co
 
 static int release_ir_peripheral_slot(int index) {
 //    if (index < 0 || index >= ZMK_SPLIT_BLE_PERIPHERAL_COUNT) {
-    if (index < 0 || index >= ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS) {
+    if (index < 0 || index >= CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS) {
     return -EINVAL;
     }
 
@@ -93,7 +93,7 @@ static int release_ir_peripheral_slot(int index) {
 static int reserve_ir_peripheral_slot_for_conn(struct bt_conn *conn) {
 #if IS_ENABLED(CONFIG_ZMK_SPLIT_BLE_PREF_WEAK_BOND)
 //    for (int i = 0; i < ZMK_SPLIT_BLE_PERIPHERAL_COUNT; i++) {
-        for (int i = 0; i < ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS; i++) {
+        for (int i = 0; i < CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS; i++) {
         if (peripherals[i].state == PERIPHERAL_SLOT_STATE_OPEN) {
             // Be sure the slot is fully reinitialized.
             release_ir_peripheral_slot(i);
