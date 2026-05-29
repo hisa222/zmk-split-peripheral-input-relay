@@ -129,7 +129,8 @@ int release_ir_peripheral_slot_for_conn(struct bt_conn *conn) {
 
 #if CONFIG_INPUT
 K_MSGQ_DEFINE(peripheral_input_relay_event_msgq, sizeof(struct input_event),
-              CONFIG_ZMK_SPLIT_BLE_CENTRAL_POSITION_QUEUE_SIZE, 4);
+              //CONFIG_ZMK_SPLIT_BLE_CENTRAL_POSITION_QUEUE_SIZE, 4);
+            10, 4);
 
 void peripheral_input_relay_event_work_callback(struct k_work *work) {
     struct input_event ev;
