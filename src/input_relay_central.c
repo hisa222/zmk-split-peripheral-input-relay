@@ -6,6 +6,9 @@
 
 #define DT_DRV_COMPAT zmk_split_peripheral_input_relay
 
+// dongle error
+#define CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS 2
+
 #include <zephyr/types.h>
 #include <zephyr/init.h>
 
